@@ -13,6 +13,7 @@ namespace Domain.Interfaces
         DatabaseFacade Database { get; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Department> Departments { get; set; }
+
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

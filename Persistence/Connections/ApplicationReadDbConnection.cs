@@ -33,6 +33,7 @@ namespace Persistence.Connections
         {
             return await connection.QuerySingleAsync<T>(sql, param, transaction);
         }
+
         public void Dispose()
         {
             connection.Dispose();
