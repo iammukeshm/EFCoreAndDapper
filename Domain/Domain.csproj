@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="CWM.DotNetCore.Domain" Version="1.0.0" />
+  </ItemGroup>
+
 </Project>
