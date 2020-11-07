@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using System.Data;
 
 namespace Persistence.Contexts
@@ -10,7 +11,6 @@ namespace Persistence.Contexts
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
-
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Department> Departments { get; set; }
         public IDbConnection Connection => Database.GetDbConnection();
