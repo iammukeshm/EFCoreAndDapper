@@ -1,5 +1,4 @@
-﻿using CWM.DotNetCore.ValidatR;
-using Domain.Entities;
+﻿using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -52,12 +51,18 @@ namespace WebApi.Controllers
                     _dbContext.Database.UseTransaction(transaction as DbTransaction);
                     //Check if Department Exists (By Name)
                     bool DepartmentExists = await _dbContext.Departments.AnyAsync(a => a.Name == employeeDto.Department.Name);
-                    Throw.Exception.IfTrue(DepartmentExists, "Department Already Exists");
+                    if (DepartmentExists)
+                    {
+                        throw new Exception("Department Already Exists");
+                    }
                     //Add Department
                     var addDepartmentQuery = $"INSERT INTO Departments(Name,Description) VALUES('{employeeDto.Department.Name}','{employeeDto.Department.Description}');SELECT CAST(SCOPE_IDENTITY() as int)";
                     var departmentId = await _writeDbConnection.QuerySingleAsync<int>(addDepartmentQuery, transaction: transaction);
                     //Check if Department Id is not Zero.
-                    Throw.Exception.IfZero(departmentId, "Department Id");
+                    if (departmentId == 0)
+                    {
+                        throw new Exception("Department Id");
+                    }
                     //Add Employee
                     var employee = new Employee
                     {

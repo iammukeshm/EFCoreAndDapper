@@ -1,9 +1,8 @@
-﻿using CWM.DotNetCore.Domain;
-
-namespace Domain.Entities
+﻿namespace Domain.Entities
 {
-    public class Department : BaseEntity
+    public class Department
     {
+        public int Id { get; set; }
         public string Name { get; set; }
 
         public string Description { get; set; }
